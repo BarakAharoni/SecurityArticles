@@ -119,7 +119,6 @@ In this way, the binary file which contains the shellcode will be converted to a
 # Conclusion
 In this writeup, we understood how to identify and analyze a shellcode using several tools.
  I hope you learned a thing or two from this article.
-Also, you can find it at:
-<iframe width="560" height="315" src="https://infosecwriteups.com/shellcode-analysis-313bf4ca4dec" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Also, you can find it at: "https://infosecwriteups.com/shellcode-analysis-313bf4ca4dec".
 
 Thanks for reading.
