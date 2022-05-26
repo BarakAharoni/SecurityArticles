@@ -6,20 +6,25 @@ Its name comes from the fact that attackers use it to get a shell on a system.
 
 ## Dependencies
 Shellcodes have some dependencies that may make it a little bit harder to write them.
+
 1. Length - Because shellcode exploits a specific vulnerability in the memory, the sequence needs to be efficient as possible. It means the attacker has to suit its length to the buffer's size, so all of the instructions will run in memory space.
 If the shellcode's length will be larger than the buffer's size, there may be certain results like a program crash or even exploitation (like buffer overflow).
-2. Unallowed characters - When characters like `'\r'`, `'\n'`, `0x00`, etc. appear in the shellcode, the code that is supposed to run will terminate and not be finished. # why?
+2. Unallowed characters - When characters like `'\r'`, `'\n'`, `0x00`, etc. appear in the shellcode, the code that is supposed to run will terminate and not be finished.
 For example, when 'Null Bytes' ( like `0x00` value) are being read, the CPU recognized it as the end of the string (Null Terminator).
 
-## Unix Shellcodes
-The Unix operation system provides direct access to communicate and manage the Kernel - with the instruction `int 0x80`. Therefore, when a System Call follows with that instruction will set, the shellcode will be given the ability to execute with high privileges without a special effort from the attacker.
+# Unix Shellcodes
+The Unix operation system provides direct access to communicate and manage the Kernel - with the instruction `int 0x80`.
+Therefore, when a System Call follows with that instruction will set, the shellcode will be given the ability to execute with high privileges without a special effort from the attacker.
 
-## Windows Shellcodes
+# Windows Shellcodes
 In Windows-based operation systems, creating a shellcode could be a little harder, due to memory protection mechanisms such as ASLR (Address Space Layout Randomization).
-Finding API function's addresses in memory
+
+## Finding API function's addresses in memory
 Most of the time, the shellcode is injected into a running process, therefore it doesn't have any prior knowledge about the memory state, and so about API function's addresses. 
 Conclusion: it can't be based on static addresses.
+
 Therefore, a shellcode is unable to use instruction as `Call CreateProcessA` or `jmp sub_40100000`, and must be running independently from its location to find the wanted API function and resolve the address manually. In other words, to find the DLL it wants to use regardless of addresses but based on the structure of the objects in the memory. That is also the reason it is called - Position Independent Code (PIC).
+
 For example, to call to `GetProcAddress`, the shellcode needs to find the address of `Kernel32.dll` DLL.
 
 So how can it be done?
@@ -38,7 +43,9 @@ What it needs to do:
 7. Eventually, running the wanted function using its suitable parameters.
 
 ## Using SEH - Structured Exception Handling
-The technique is about accessing the bottom of the SEH Chain, by entering the first property in TIB (Thread Information Block), which has a constant address - `FS:[0x0]`. It contains the default exception handler of `Kernel32.dll` module. To locate the wanted module's address, it is possible to go back to the memory addresses until finding the module's entry point(using the `MZ` signature or `0x5A4D` for example).
+The technique is about accessing the bottom of the SEH Chain, by entering the first property in TIB (Thread Information Block), which has a constant address - `FS:[0x0]`. 
+It contains the default exception handler of `Kernel32.dll` module. 
+To locate the wanted module's address, it is possible to go back to the memory addresses until finding the module's entry point(using the `MZ` signature or `0x5A4D` for example).
 
 ## Using TEB - Thread Environment Block
 Like the SEH technique, it's possible to access the TEB object, which has a constant location in memory - `FS:[0x18]`. Passing through this object may lead you to the SEH Chain, as mentioned above.
@@ -47,7 +54,11 @@ Like the SEH technique, it's possible to access the TEB object, which has a cons
 This method is not very common, as it relies on having the address of the desired DLL which has the wanted API function inside the stack.
 
 ## Find API function by Hash
-This technique is also called SFHA (Stephen Fewer's Hash API). It uses 4 bytes to represent the Hash value of `DLL!WinAPI` function inside `EAX` register. Then, a `JMP` to that address is being made to call that function. Pay attention to which function is called from `EAX` and what parameters it gets (you can check them in MSDN). Then, compare with the real values in the memory. For example, if a shellcode calls the `Win_Exec` function, it will pass through every `DLL!WinApi` uses one of the other techniques, and with other parameters(we can identify them by `PUSH` instruction before the register call). When we enter the parameter's memory address, we may know what's in there (maybe a `PS1` script or Encoded Commands..).
+This technique is also called SFHA (Stephen Fewer's Hash API). It uses 4 bytes to represent the Hash value of `DLL!WinAPI` function inside `EAX` register. Then, a `JMP` to that address is being made to call that function.
+
+Pay attention to which function is called from `EAX` and what parameters it gets (you can check them in MSDN). Then, compare with the real values in the memory. For example, if a shellcode calls the `Win_Exec` function, it will pass through every `DLL!WinApi` uses one of the other techniques, and with other parameters(we can identify them by `PUSH` instruction before the register call).
+
+When we enter the parameter's memory address, we may know what's in there (maybe a `PS1` script or Encoded Commands..).
 
 # Detection
 After we understood a little bit about what shellcodes are, let's see how to detect them. 
