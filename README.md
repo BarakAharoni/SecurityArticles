@@ -1,3 +1,7 @@
 # Security-Writups
 My articles on cyber security.
-Enjoy :)
+
+Medium profile: "https://medium.com/@3barak333".
+
+Enjoy,
+Barak Aharoni
