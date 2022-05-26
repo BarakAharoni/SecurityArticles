@@ -5,7 +5,8 @@ When compiling a Python script (`.py`), you’ll end up with a compiled Python (
 # Our case study
 In this writeup, we will analyze a short script named `demo_script.py`:
 
-`# Imports
+```
+# Imports
 from random import Random
 from sys import *
 import os
@@ -34,7 +35,7 @@ def main():
     print(END_BANNER)
 if __name__ == "__main__":
     main()
- `
+```
  
  There are several tools to compile Python scripts, the most common of which are `PyInstaller` and `Py2Exe`. Every tool compiles Python scripts differently, yet it can be identified generally.
  
@@ -44,12 +45,13 @@ if __name__ == "__main__":
  ![image](https://user-images.githubusercontent.com/97598628/170483845-9f7c7788-7f47-493b-9acb-5b949cf94002.png)
 
 - Use the `strings` tool (from `SysInternals Suite`) that contains Python information like:
-`“Could not load python dll”
+```
+“Could not load python dll”
 PY2EXE_VERBOSE
 PyInstaller
 “PYTHONSCRIPT”
 strings.exe -a “.\dist\demo_script.exe” > strings.txt
-`
+```
 ![image](https://user-images.githubusercontent.com/97598628/170483927-aaca774f-b267-48ca-a960-f04d0bb82f5a.png)
 
 - Detect that the file is probably packed — PyInstaller for example is recognized as a packer since it wraps the source code at the new executable.
@@ -93,7 +95,7 @@ The module `marshal` allows to read and write specific Python values in a binary
 
 The following script extracts the bytecode into a readable structure that allows rewriting of the original Python script:
 
-`
+```
 import sys
 import dis, marshal
 pyc_path = sys.argv[1]
@@ -102,7 +104,7 @@ with open(pyc_path, 'rb') as f:
     pyc_header = f.read(16)
     code_obj = marshal.load(f) # Suite to code object
 dis.dis(code_obj)
-`
+```
 
 For comfort, pipe the output to a text file:
 `manually_decompile.py demo_script.pyc > dis.txt`
@@ -122,11 +124,12 @@ To understand the disassemble output, you can view the module's documentation.
 The bytecode analysis API allows pieces of Python code to be wrapped in a bytecode object that provides easy access to details of the compiled code.
 https://docs.python.org/3/library/dis.html
 
-`LOAD_FAST — load a local variable.
+```
+LOAD_FAST — load a local variable.
 BINARY_ADD — add the last value to the previous one.
 CALL_FUNCTION — call a function
 And so on…
-`
+```
 Now we need to parse the output of `dis.txt` and rewrite the legitimate .py script —which should result in a script identical to the original one.
 
 ## Identify Python script structure from bytecodes
@@ -142,10 +145,11 @@ For example, for the following part of the code:
 ![image](https://user-images.githubusercontent.com/97598628/170484883-48b38473-a1a4-4b7e-967d-9651e3a3a210.png)
 
 We get:
-`from random import Random
+```
+from random import Random
 from sys import *
 import os
-`
+```
 
 ### Constants
 Constant variables usually are found immediately after the modules.
@@ -156,9 +160,10 @@ Main instructions: `LOAD_CONST` combined with `STORE_NAME`.
 ![image](https://user-images.githubusercontent.com/97598628/170484989-7cbcf70d-8143-4871-b443-1ae165cea030.png)
 
 Converts to:
-`START_BANNER = "Hello you, have fun with this demo script!"
+```
+START_BANNER = "Hello you, have fun with this demo script!"
 END_BANNER = "Goodbye."
-`
+```
 
 ### Defining functions
 In this section, there will be only the function’s names and not the content and algorithms. Due to the relation to functions is like to a constant object in the code. It can help us understand the flow of the code.
@@ -169,10 +174,11 @@ Immediately after, the instruction `MAKE_FUNCTION` appears with a constant varia
 
 Is converted to:
 
-`def new_num():
+```
+def new_num():
 def rot():
 def main():
-`
+```
 
 The content of each function can be filled by jumping to the correct offset (the line number will be reset and we can compare the function’s name). Every section and instruction that will be found in this zone belongs to the specific function (indented in the original script).
 We can recognize the end of the function, by the `RETURN_VALUE` instruction. Thus, like a stack, the value that will be loaded to the previous instruction (like `LOAD_CONST`), will be the return value of the function.
@@ -190,9 +196,10 @@ Furthermore, the instruction `COMPARE_OP` contains the Boolean condition’s ope
 
 The sharp-eyed will notice that this is the known ‘main’ condition:
 
-`if __name__ == “__main__”:
+```
+if __name__ == “__main__”:
     main()
- `
+```
  
 ### Functions calls
 To recognize calls to functions inside the code, we’ll search for the relevant instructions: `CALL_METHOD`, `CALL_FUNCTION`, etc.
@@ -207,7 +214,8 @@ For example, we will revert a line from the `new_num` function mentioned earlier
 
 The result will be:
 
-`rnd_num = Random().randint(1,6)
+`
+rnd_num = Random().randint(1,6)
 `
 
 ### Loops
@@ -222,11 +230,12 @@ Let’s examine this part of the code:
 
 We can see it becomes:
 
-`for i in inp:
+```
+for i in inp:
     rot_num = new_num()
     rotted.append(chr(ord(i) + rot_num))
 return rotted
-`
+```
 
 The variable `i` is the iterator variable and `inp` is the iterable variable that the loop is based on. Everything inside the `>>` sign is indented inside the loop.
 
