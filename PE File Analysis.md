@@ -17,6 +17,10 @@ In addition, looking in a known malwares databases (`VirusTotal`) and signatures
 ### CFFExplorer
 Allows to watch and patch the file, based on the PE format.
 
+### PEFA
+PE File Analysis tool which allows to get interesting information about the file and check for matching *Yara-Rules* signatures.
+https://github.com/BarakAharoni/PEFA
+
 ## Suscicious Indicators
 ### Strings
 A tool from *SysInternals Suite* which allows to export both *ASCII* and *UNICODE* strings of the file.
@@ -27,10 +31,6 @@ All *UNICODE* strings: `strings.exe --encoding=-l {file}`
 
 ### PeStudio
 GUI tool which contains various information about the file.
-
-### PEFA
-PE File Analysis tool which allows to get interesting information about the file and check for matching *Yara-Rules* signatures.
-https://github.com/BarakAharoni/PEFA
 
 ## Packer Detection
 ### DIE
@@ -43,9 +43,19 @@ Similar to DIE with its abilities.
 In this method, we want to understand the program behavior, to know where to focus on our advanced analysis. 
 Here, we are gonna running the program under an *isolated environment*, which need to be similar as possible to the environment of the program (Simulate services, running under dedicated program, .etc).
 
-In this method, documents all the evidence is really important! (Network truffic, actions that happend, what other artifacts in the OS the program is related to?).
-At the end, we can take a *Real time memory dump* for later analysis (with `Volatility`).
+## What to do?
+1. Take a snapshot of the VM (before running the program/ malware).
+2. Simulates different services needed for the program (using *INetSim* or `httpd start` on a Linux machine conected to the VM).
+3. Network sniffing (using *Wireshark* or *TcpDump*).
+4. Monitor operation system artifacts - like files atachments, registry keys and more (using *ProcMon*, *RegShot*).
+5. Taking memory dump after runnig the program for later analysis with *Volatility*.
 
+## Running DLL
+Because DLLs don't have entry point, they can't run by themselves.
+We can run DLL by the following instructions:
+1. By export function: `rundll32.exe, {DLLName}, {ExportArg}`
+2. By export index: `rundll32.exe, {DLLName}, #{Index}`
+3. 
 
 
 # Advanced Analysis
