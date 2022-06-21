@@ -1,20 +1,48 @@
-# Security-Writups
-Thie repository can uses as a guidence to Security Researchers who wants to specializes in Reverse-Engineers and Malware-Analysis.
+# Security-Guide
+This repository can uses as a guidance to Security and Malware Researchers.
 
-## File Formats and Topics 
-* PE
-* ELF
-* Microsoft Office
-* PDF
-* RTF
-* Python Bytecodes (PYC)
+## Table of Contents
+
+
+
+
+## Books
+
+## Papers
+* Python Bytecode Analysis
 * Shellcodes
 * Unpacking
 * Anti-Reversing Techniques
+* 
+
+
+## Tools
+### File Formats Analysis
+#### PE
+#### ELF
+#### Microsoft Office
+#### PDF
+#### RTF
+#### Python Bytecodes (PYC)
+#### .Net
+#### Android APK
+#### iOS
+
+### Memory Analysis
+* Volatility
+* 
+
+### Network 
+
+
+## Trainings
 
 
 
 
+
+
+--------------------------------------------------------------------------------------------------------
 Few of my articles on cyber security also found on my *Medium* profile: "https://medium.com/@3barak333".
 
 Enjoy,
