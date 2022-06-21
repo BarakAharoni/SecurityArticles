@@ -15,7 +15,7 @@ In addition, looking in a known malwares databases (`VirusTotal`) and signatures
 
 ## File Information
 ### CFFExplorer
-Allows to watch and patch the file, parsed by the PE format.
+Allows to watch and patch the file, based on the PE format.
 
 ## Suscicious Indicators
 ### Strings
