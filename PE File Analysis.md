@@ -10,7 +10,7 @@ Portable Executable (PE) format is basically the format of executable file in Wi
 # Basic Static Anlysis
 The purpose of this method is to collect as many information as possible about the program without running it and withoout spending too much time on the investigation.
 
-So, first of all, we need to fegure its *file type* (make sure it is really `PE`, and its version - `\x86` or `\x64` bit). We are also look for interesting *strings* as host and network artifacts (IP addresses, ports, URL addresses, Registry keys, .etc).
+So, first of all, we need to fegure its *file type* (make sure it is really `PE`, and its version - `x32` or `x64` bit). We are also look for interesting *strings* as host and network artifacts (IP addresses, ports, URL addresses, Registry keys, .etc).
 In addition, looking in a known malwares databases (`VirusTotal`) and signatures (`YARA`).
 
 ## File Information
