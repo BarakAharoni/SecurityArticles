@@ -1,7 +1,21 @@
 # Security-Writups
-My articles on cyber security.
+Thie repository can uses as a guidence to Security Researchers who wants to specialize in Reverse-Engineers and Malware-Analysis.
 
-Medium profile: "https://medium.com/@3barak333".
+## File Formats and Topics 
+* PE
+* ELF
+* Microsoft Office
+* PDF
+* RTF
+* Python Bytecodes (PYC)
+* Shellcodes
+* Unpacking
+* Anti-Reversing Techniques
+
+
+
+
+Few of my articles on cyber security also found on my *Medium* profile: "https://medium.com/@3barak333".
 
 Enjoy,
 Barak Aharoni
