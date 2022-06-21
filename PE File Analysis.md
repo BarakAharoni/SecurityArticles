@@ -30,6 +30,7 @@ GUI tool which contains various information about the file.
 
 ### PEFA
 PE File Analysis tool which allows to get interesting information about the file and check for matching *Yara-Rules* signatures.
+https://github.com/BarakAharoni/PEFA.git
 
 ## Packer Detection
 ### DIE
