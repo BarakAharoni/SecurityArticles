@@ -241,6 +241,9 @@ The variable `i` is the iterator variable and `inp` is the iterable variable tha
 
 In the end, we can see the return with the variable rotted.
 
+# PycDcode
+The tool which creates a python script template is available at: "https://github.com/BarakAharoni/pycDcode.git".
+
 # Conclusion
 In this write up we understood how to reverse and analyze a compiled Python file with open-source tools and also ‘manually’ only with the default Python language. I hope you learned a thing or two from this article.
 Also, you can find it at: "https://betterprogramming.pub/analysis-of-compiled-python-files-629d8adbe787".
