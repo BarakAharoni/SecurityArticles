@@ -1,5 +1,5 @@
 # Security-Writups
-Thie repository can uses as a guidence to Security Researchers who wants to specialize in Reverse-Engineers and Malware-Analysis.
+Thie repository can uses as a guidence to Security Researchers who wants to specializes in Reverse-Engineers and Malware-Analysis.
 
 ## File Formats and Topics 
 * PE
