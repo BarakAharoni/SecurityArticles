@@ -55,7 +55,31 @@ Because DLLs don't have entry point, they can't run by themselves.
 We can run DLL by the following instructions:
 1. By export function: `rundll32.exe, {DLLName}, {ExportArg}`
 2. By export index: `rundll32.exe, {DLLName}, #{Index}`
-3. 
+3. Patching the `PE Header` to load the DLL (may use with *CFF Explorer*): `IMAGE_FILE_HEADER -> Characteristics field -> IMAGE_FILE_DLL (0x2000)
+4. Install as a service: `net start {ServiceName}` and than `rundll32.exe {DLLName}, InstallService {ServiceName}`
+
+## Services Simulation
+Because we running the program (or malware) in an isolated environment, the program not always has access to systems, applications or relevant servers he may related on. As a result, we can miss important information about its behaviour in the network.
+Therefore, we can simulate the relevant services like *DNS* or *Application Services* and document the program's actions.
+
+### INetSim
+Allows simulates several protocols: `HTTP, HTTP, SMTP, FTF, POP3, TFTP, .etc`.
+Based on a configuration file located at: `/etc/inetsim/inetsim.conf`.
+Log files: `/var/log/inetsim`, `/var/log/inetsim/service.log`.
+File the program uses will saved at: `/var/lib/inetsim`.
+Any of those, may be IOC of program behaviour.
+Running: `inetsim`.
+
+### httpd Service
+Running the `httpd` services can help to define the VM as HTTP Server. So, when the program will try to contact with a HTTP Server, he contact with the monitored VM.
+Pay attention that the program may try to access to a specific Web page - we can create one and give it the matches name!
+Running: `httpd start`.
+
+### FakeDNS
+In addition, the monitored VM can uses as a DNS Server, so every DNS query will first get to it. With this tool we can map which IPs the program will try to connect with.
+Running: `fakedns`.
+
+## Network Sniffing
 
 
 # Advanced Analysis
