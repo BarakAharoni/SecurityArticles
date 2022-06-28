@@ -13,6 +13,7 @@ This repository can uses as a guidance to Security and Malware Researchers.
 * Shellcodes
 * Unpacking
 * Anti-Reversing Techniques - Windows & Linux
+* Identify malicious activity using WinAPIs.
 
 
 
