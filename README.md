@@ -12,8 +12,8 @@ This repository can uses as a guidance to Security and Malware Researchers.
 * Python Bytecode Analysis
 * Shellcodes
 * Unpacking
-* Anti-Reversing Techniques
-* 
+* Anti-Reversing Techniques - Windows & Linux
+
 
 
 ## Tools
@@ -30,7 +30,6 @@ This repository can uses as a guidance to Security and Malware Researchers.
 
 ### Memory Analysis
 * Volatility
-* 
 
 ### Network 
 
