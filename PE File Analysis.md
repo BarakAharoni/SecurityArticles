@@ -124,11 +124,52 @@ Abort: `iptables -t nat -D PREROUTING -i {interface_name} -j REDIRECT` or `accep
 
 ### Listen with Netcat
 
+`nc -nlvp {port} > {out_file}`
+
+Then, see the evidence: `xdd {out_file} | more`.
+
+
+## File System Behavior
+
+### Process Explorer
+Real-Time process viewer.
+
+### Resource Hacker
+Real-Time process viewer.
+
+### APIMonitor
+WinAPI functions monitoring. We can use it to look over specific API function used by the program (like Crypto function uses to encrypt or decrypt, etc).
+
+* Open APIMonitor
+* Choose `API Filter`
+* `Monitor New Process -> Choose the process`
+* `Summery -> Choose the wanted API call entry`
+* `Hex Buffer -> show results`
+
+### ProcMon
+Real-Time powerfull process monitor.
+Save evidenc to a `CSV` file: `File -> Save -> Format: Comma-Separated Values (CSV), Path: -> OK`.
+
+### ProcDot
+Graph-View of the process' behavior. We can load a `CSV` file which contains the process' information (from `ProcMon`).
 
 
 
 # Advanced Analysis
 Open the program in relevant *Disassemblers* and *Debuggers* for deep understanding of the program. Pay attention to *Anti-Reversing* and *Packing* techniques.
+
+## IDA PRO
+Powerfull Disassembler and Debugger.
+
+## Ghidra
+Open-Source Disassembler.
+
+## x32dbg / x64dbg
+Excellent Debugger.
+
+# WinDbg
+Original windows debugger.
+
 
 # Report
 Creates a full documented report which contains all the IOCs found in the investigation.
