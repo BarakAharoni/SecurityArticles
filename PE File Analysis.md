@@ -100,6 +100,31 @@ Running: `fakedns`.
 
 
 ## Network Sniffing
+Looking for network indicators may lead as more understanding of the program - what protocols and ports it uses, which URLs to IP addreses it try to connect with and more.
+
+### tcpdump
+Allows network capture acording to the NIC
+
+Running: `tcpdump -i {interface_name}`
+
+### Wireshark
+Network sniffer with a lot of abilities.
+
+### Fiddler
+Similar to *Wireshark* with its purpose. Also uses for debugging by being a proxy in the network - which allows to watch encrypted traffic (like HTTPS).
+
+Verify that it configured: `Direct to HTTPS -> Decrypt HTTPS Traffic Auto Responder -> Enable Rules`.
+
+### IPTables
+We can redirect all the network traffic to a local port which belongs to our investigation host. 
+
+Running: `iptables -t nat -A PREROUTING -i {interface_name} -j REDIRECT` or `accept-all-ips start`.
+
+Abort: `iptables -t nat -D PREROUTING -i {interface_name} -j REDIRECT` or `accept-all-ips stop`.
+
+### Listen with Netcat
+
+
 
 
 # Advanced Analysis
