@@ -1,10 +1,7 @@
-# Security-Guide
-This repository can uses as a guidance to Security and Malware Researchers.
+# SecurityAritcles
+This repository contains articles and guidance for Security and Malware Researchers.
 
 ## Table of Contents
-
-
-
 
 ## Books
 
