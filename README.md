@@ -40,7 +40,7 @@ This repository contains articles and guidance for security and malware research
 
 
 --------------------------------------------------------------------------------------------------------
-Few of my articles on cyber security also found on my *Medium* profile: "https://medium.com/@3barak333".
+Few of my articles on cyber security also found on my *Medium* [profile](https://medium.com/@3barak333).
 
 Enjoy,
 Barak Aharoni
