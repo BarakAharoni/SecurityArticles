@@ -1,5 +1,5 @@
 # SecurityAritcles
-This repository contains articles and information for security and malware researchers.
+This repository contains articles and information for security researchers.
 
 ## Table of Contents
 
