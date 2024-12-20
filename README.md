@@ -3,7 +3,8 @@ This repository contains articles and information for security researchers.
 
 ## Table of Contents
 
-## Books
+## Conferences
+* [ROOTCON18](Conferences/ROOTCON18/README.md)
 
 ## Papers
 * [Python Bytecode Analysis](https://betterprogramming.pub/analysis-of-compiled-python-files-629d8adbe787)
