@@ -1,7 +1,5 @@
-# SecurityAritcles
-This repository contains articles and information for security researchers.
-
-## Table of Contents
+# MyResearchList
+This repository contains my articles and information for security researchers.
 
 ## Conferences
 * [ROOTCON18](Conferences/ROOTCON18/README.md)
@@ -9,8 +7,6 @@ This repository contains articles and information for security researchers.
 ## Papers
 * [Python Bytecode Analysis](https://betterprogramming.pub/analysis-of-compiled-python-files-629d8adbe787)
 * [Shellcode Analysis](https://infosecwriteups.com/shellcode-analysis-313bf4ca4dec)
-* Unpacking
-* Anti-Reversing Techniques - Windows & Linux
 * [Identify malicious activity using WinAPIs](https://medium.com/@3barak333/identifying-malicious-activity-using-winapis-0e0ef8ba20a7)
 
 --------------------------------------------------------------------------------------------------------
